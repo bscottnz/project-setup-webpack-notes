@@ -1,1 +1,1 @@
-# project-setup-webpack-notes
+# Project Setup Guide. Webpack, eslint and prettier.
