@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webpack assets practise</title>
+  </head>
+  <body>
+    <!-- This is just practising using webpack to bundle imgages from different sources. Since the bundled files are 
+        in a different directory, the url to the images will no longer work. Webpack can take care of this for you. -->
+    <div class="wrapper">
+      <h3>Using webpack to handle image urls during bundling.</h3>
+
+      <div class="img1">
+        <p>This image is embedded in the html.</p>
+        <div class="img-container">
+          <img src="./assets/cat1.jpeg" alt="" />
+        </div>
+      </div>
+
+      <div class="img2">
+        <p>This image is a css background.</p>
+        <div class="img-container"></div>
+      </div>
+
+      <div class="img3">
+        <p>This image is injected with javascript.</p>
+        <div class="img-container"></div>
+      </div>
+    </div>
+    <script src="src/index.js"></script>
+  </body>
+</html>
