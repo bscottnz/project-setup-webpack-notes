@@ -1,0 +1,19 @@
+/* untill image loaders are configured, the background image will not work */
+
+.img2 .img-container {
+  height: 200px;
+  background-image: url('./assets/cat2.jpeg');
+  background-repeat: no-repeat;
+}
+
+.img4 .img-container {
+  height: 200px;
+  background-image: url('./assets/cat4.jpeg');
+  background-repeat: no-repeat;
+}
+
+// .img2 .img-container {
+//   height: 200px;
+//   background-color: rgb(33, 148, 85);
+//   background-repeat: no-repeat;
+// }
