@@ -494,3 +494,5 @@ A new css file is now produced on build, and is linked to inside of `index.html`
 The rest of the video tutorial covers minifiying the js, css and html files. However this is now done automatically for the production build. If you are not using sass and `sass-loader` you may need to minify the css manually, since `sass-loader` is what performs the css minification. If this is the case, follow the rest of the video. The steps are very easy.
 
 Webpack should now be bundling your scripts, compiling your sass (if you are using sass), creating a live development server, saving your bundled files under new names to avoid cache problems, copying assets to `/dist` and fixing all image urls to account for this, seperating your vendor code (if you are using any and want to split it) and minifying your files. Everything you need to run your site/app is nicely bundled inside of `/dist`.
+
+If you havn't already, I highly recommend watching Colt Steele's ["Learn Webpack - Full Tutorial for Beginners"](https://www.youtube.com/watch?v=MpGLUVbqoYQ). This readme is only meant to be a quick reference for setting up your projects.
