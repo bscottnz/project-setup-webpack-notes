@@ -222,7 +222,7 @@ module: {
 import './main.scss';
 ```
 
-At this point, webpack can now compile sass and inject it into the DOM. Notice there is no css file being linked into the html. Later on we will get webkit to create a css file that can be linked.
+At this point, webpack can now compile sass and inject it into the DOM. Notice there is no css file being linked into the html. Later on we will get webpack to create a css file that can be linked.
 
 ### Cache Busting and Plugins
 
