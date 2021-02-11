@@ -202,7 +202,7 @@ Loaders are packages that dictate how certain files should be pre-processed as y
 npm install --save-dev style-loader css-loader sass-loader node-sass
 ```
 
-- To use these loaders, we need to update `webpack.config.js`. In `webpack.config.js`, add the following to `module.exports`. This will apply the loaders to any files ending with `.scss`.
+- To use these loaders, we need to update `webpack.config.js`. In `webpack.config.js`, add the following to `module.exports`. This will apply the loaders to any files ending with `.scss`. If you are not using sass, then use `test: /\.css$/` and remove `sass-loader` from the `use` array in this and all the following code examples.
 
 ```js
 module: {
@@ -435,12 +435,62 @@ If you need to seperately bundle vendor code such as bootstrap or jQuery, you ca
 
 ### Extract CSS & Minify HTML/CSS/JS
 
-[Video Tutorial.](https://www.youtube.com/watch?v=JlBDfj75T3Y&list=PLblA84xge2_zwxh3XJqy6UVxS60YdusY8&index=10))
+[Video Tutorial.](https://www.youtube.com/watch?v=JlBDfj75T3Y&list=PLblA84xge2_zwxh3XJqy6UVxS60YdusY8&index=10)
 
-Right now, all of our css is being loaded through javascript, and being injected into the DOM through a style tag. When you reload the page, there is a slight delay before the styles are loaded and for a breif moment you see the unstyled page. For production, it is nice to extract this css into its own file. In development mode this is not necessary as it will compile every time which can be slow.
+Right now, all of our css is being loaded through javascript, and being injected into the DOM through a style tag. When you reload the page, there is a slight delay before the styles are loaded and for a brief moment you see the unstyled page. For production, it is nice to extract this css into its own file. In development mode this is not necessary as it will compile every time which can be slow.
 
 - Install css extraction plugin.
 
 ```
 npm install --save-dev mini-css-extract-plugin
 ```
+
+- Update `webpack.prod.js` to the following.
+
+```js
+// webpack.prod.js
+
+const path = require('path');
+const { merge } = require('webpack-merge');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const common = require('./webpack.common');
+
+module.exports = merge(common, {
+  mode: 'production',
+  output: {
+    filename: 'main.[contenthash].js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'main.[contenthash].css',
+    }),
+    new CleanWebpackPlugin({
+      cleanAfterEveryBuildPatterns: ['dist'],
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '',
+            },
+          },
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+    ],
+  },
+});
+```
+
+A new css file is now produced on build, and is linked to inside of `index.html`.
+The rest of the video tutorial covers minifiying the js, css and html files. However this is now done automatically for the production build. If you are not using sass and `sass-loader` you may need to minify the css manually, since `sass-loader` is what performs the css minification. If this is the case, follow the rest of the video. The steps are very easy.
+
+Webpack should now be bundling your scripts, compiling your sass (if you are using sass), creating a live development server, saving your bundled files under new names to avoid cache problems, copying assets to `/dist` and fixing all image urls to account for this, seperating your vendor code (if you are using any and want to split it) and minifying your files. Everything you need to run your site/app is nicely bundled inside of `/dist`.
