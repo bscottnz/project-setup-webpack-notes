@@ -280,7 +280,7 @@ Webpack will now generate a new filename for `main.js` on each save (assuming th
 
 [Video Tutorial.](https://www.youtube.com/watch?v=VR5y93CNzeA&list=PLblA84xge2_zwxh3XJqy6UVxS60YdusY8&index=7)
 
-So far we have one webpack config we use every time we build. This works great but it is useful to have different functionality for development and production. We will split our config into three files. A config for common options, one for development specific options, and one for production specific options. We also have to run `npm build` after every change, but we can configure this to happen automatically whenever a file changes with a live updating server.
+So far we have one webpack config we use every time we build. This works great but it is useful to have different functionality for development and production. We will split our config into three files. A config for common options, one for development specific options, and one for production specific options. We also have to run `npm start` after every change, but we can configure this to happen automatically whenever a file changes with a live updating server.
 
 - Rename `webpack.config.js` to `webpack.common.js` and create two new files, `webpack.dev.js` and `webpack.prod.js`.
 - To extend `webpack.common.js` into `webpack.dev.js` and `webpack.prod.js`, we need to download `webpack-merge`.
